@@ -1,0 +1,22 @@
+{{ define "base" }}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" type="text/css" href="/static/main.css"/>
+  </head>
+  <body class="bg-dark">
+    <header class="app-header">
+      {{ template "header" . }}
+    </header>
+
+    <main>
+      {{ template "body" . }}
+    </main>
+
+    <footer class="app-footer">
+      {{ template "footer" . }}
+    </footer>
+  </body>
+</html>
+{{ end }}
+

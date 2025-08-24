@@ -1,0 +1,204 @@
+/* ====== Design tokens ====== */
+:root{
+  --bg: #0a0a0d;
+  --panel: #14141f;
+  --panel-2: #1a1a27;
+  --text: #e9e9f3;
+  --muted: #b7b7c9;
+  --accent: #8b5cf6; /* purple */
+  --accent-2: #c084fc;
+  --ring: rgba(139,92,246,.45);
+  --border: #2a2a3a;
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+
+/* ====== Base ====== */
+*{ box-sizing:border-box }
+html,body{ height:100% }
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font: 16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Inter,Ubuntu,"Helvetica Neue",Arial,sans-serif;
+}
+
+/* Utilities */
+.bg-dark{ background-color: var(--bg); }
+.text-white{ color: var(--text); }
+.center{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:.75rem;
+}
+
+/* ====== Layout ====== */
+.layout{
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+}
+.app-main{
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding:40px 20px;
+}
+.container{
+  width:min(100%, 1100px);
+  margin-inline:auto;
+  padding:16px 20px;
+}
+.stack > * + *{ margin-top:1rem; }
+.grid{ display:grid; gap:1rem }
+
+/* ====== Header / Nav ====== */
+.app-header{
+  background: var(--panel);
+  border-bottom:2px solid var(--border);
+  padding:14px 20px;
+  color: white;
+}
+.brand{
+  font-weight:700;
+  letter-spacing:.2px;
+}
+.nav{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  color:white;
+}
+a{
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover{
+  color: var(--accent-2);
+  text-decoration: underline;
+}
+a[aria-current="page"]{
+  color: var(--text);
+  position:relative;
+}
+a[aria-current="page"]::after{
+  content:"";
+  position:absolute;
+  left:0; right:0; bottom:-8px;
+  height:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  border-radius:2px;
+}
+
+/* ====== Panels / Cards ====== */
+.card{
+  background: var(--panel-2);
+  border:1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding:16px;
+}
+
+/* main card vertical sizing */
+.app-main .card{
+  width:min(100%, 700px);
+  min-height:40vh;
+  max-height:70vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  padding:24px;
+  overflow-y:auto;
+}
+
+/* ====== Forms ====== */
+input[type="text"], textarea, select{
+  width:100%;
+  padding:10px 12px;
+  color:var(--text);
+  background:#0f0f18;
+  border:1px solid var(--border);
+  border-radius:12px;
+  outline:none;
+}
+textarea{ resize:vertical }
+input:focus, textarea:focus, select:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 4px var(--ring);
+}
+
+/* form row (textarea + button) */
+.form-row{
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:start;
+  gap:12px;
+}
+.form-row .btn-icon{
+  width:44px;
+  min-width:44px;
+  height:44px;
+  padding:0;
+  border-radius:12px;
+}
+
+/* Buttons */
+button, .btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 14px;
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+  color:#0b0620;
+  font-weight:700;
+  border:0;
+  border-radius:12px;
+  cursor:pointer;
+  transition: transform .04s ease-in-out, filter .15s;
+}
+button:hover, .btn:hover{ filter:brightness(1.05); }
+button:active, .btn:active{ transform:translateY(1px); }
+button:disabled{ opacity:.55; cursor:not-allowed; }
+
+/* ====== Footer ====== */
+.app-footer{
+  background: var(--panel);
+  border-top:2px solid var(--border);
+  padding:16px 20px;
+  text-align:center;
+  color:var(--muted);
+  font-size:.95rem;
+}
+
+/* ====== Extras ====== */
+h1,h2,h3{ line-height:1.2; margin:.2rem 0 .8rem }
+h1{ font-size:clamp(1.6rem, 2vw + 1rem, 2.2rem) }
+h2{ font-size:clamp(1.2rem, 1.3vw + .9rem, 1.6rem) }
+.muted{ color:var(--muted) }
+
+:focus-visible{
+  outline:none;
+  box-shadow:0 0 0 4px var(--ring) !important;
+}
+a:focus-visible{ border-radius:8px }
+
+/* mobile */
+@media (max-width:600px){
+  .app-main{ padding:20px; }
+  .form-row{ grid-template-columns:1fr; }
+  .form-row .btn-icon{ width:100%; height:48px; }
+}
+
+/* subtle scrollbars */
+*{
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+*::-webkit-scrollbar{ width:10px; height:10px; }
+*::-webkit-scrollbar-thumb{
+  background:var(--border);
+  border-radius:999px;
+}
+
