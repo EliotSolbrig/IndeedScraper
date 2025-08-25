@@ -32,11 +32,9 @@ func main(){
 	browser := rod.GetBrowser()
 	defer browser.MustClose()
 
-	page := browser.MustPage("https://google.com")
-	fmt.Println("page: ", page)
-
 	r.HandleFunc("/", router.IndexPage)
 	r.HandleFunc("/indeedtest1", router.IndeedScrapeTestPage)
+	r.HandleFunc("/scrape/jobdesc", router.ScrapeJobDescription)
 
 	fmt.Println("Now listening on port ", port)
 	panic(http.ListenAndServe(":" + port, r))

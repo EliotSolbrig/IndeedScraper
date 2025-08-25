@@ -1,13 +1,33 @@
 {{ define "body" }}
 <main class="container stack">
-  <h2>Test Page 1</h2>
+  <h2>Job Description Scraper</h2>
 
   <section class="card stack" id="indeed-page-div">
     <label for="page-url" class="muted">Paste a job post URL</label>
+    <input
+        id="posting-url"
+        name="posting-url"
+        style="width:100%;padding:0.5rem;"
+        >
+    </input>
+    </section>
 
+    <button
+        hx-post="/scrape/jobdesc"
+        hx-include="#posting-url"
+        hx-target="#job-desc"
+        hx-swap="innerHTML"
+        class="center"
+        >
+        Output Job Descrption
+    </button>
+        
+    <section>
+    <label for="page-url" class="muted">Output Job Description</label>
     <div class="form-row">
       <textarea
-        id="page-url"
+        id="job-desc"
+        name="job-desc"
         name="page-url"
         rows="6"
         placeholder="https://example.com/job/…"
@@ -18,12 +38,9 @@
       <button
         class="btn btn-icon"
         type="button"
-        hx-post="/scrape-job-desc"
-        hx-include="#page-url"
-        hx-target="#job-desc-content"
         hx-swap="innerHTML"
         aria-label="Fetch job description"
-        >›</button>
+        ></button>
     </div>
 
     <div id="job-desc-content" class="card" style="padding:12px">

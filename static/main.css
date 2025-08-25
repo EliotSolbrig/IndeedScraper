@@ -202,3 +202,7 @@ a:focus-visible{ border-radius:8px }
   border-radius:999px;
 }
 
+.center {
+    justify-items: center;
+    justify-content: center;
+}
